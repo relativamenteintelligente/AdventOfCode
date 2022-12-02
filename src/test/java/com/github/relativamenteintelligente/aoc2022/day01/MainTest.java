@@ -21,11 +21,11 @@ class MainTest {
 
     @Test
     void testGetMaxCalories() {
-        assertEquals(74198, getMaxCalories(listCalories));
+        assertEquals((Integer) 74198, getMaxCalories(listCalories));
     }
 
     @Test
     void testGetSumTopThreeCalories() {
-        assertEquals(209914, getSumTopThreeCalories(listCalories));
+        assertEquals((Integer) 209914, getSumTopThreeCalories(listCalories));
     }
 }
