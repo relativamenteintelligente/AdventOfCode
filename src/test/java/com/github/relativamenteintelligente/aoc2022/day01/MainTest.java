@@ -19,7 +19,7 @@ class MainTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testGetMaxCalories() {
         assertEquals(74198, getMaxCalories(listCalories));
     }
