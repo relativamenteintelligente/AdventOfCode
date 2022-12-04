@@ -50,7 +50,7 @@ public class Main {
             .reduce(0, Integer::sum);
     }
 
-    public static Integer partTwo() {
+    public static Integer partTwo() throws Exception {
         Integer result = 0;
         var iterator = parseInput().listIterator();
         while (iterator.hasNext()) {
@@ -60,13 +60,14 @@ public class Main {
             var commonItem = rucksack1.getItems().stream()
                 .filter(rucksack2.getItems()::contains)
                 .filter(rucksack3.getItems()::contains)
-                .toList().get(0);
+                .findFirst()
+                .orElseThrow(Exception::new);
             result += itemPriority(commonItem);
         }
         return result;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println("The sum of the priorities is " + partOne());
         System.out.println("The sum of the priorities of badges is " + partTwo());
     }

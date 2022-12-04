@@ -21,7 +21,7 @@ public class MainTest {
     }
 
     @Test
-    public void testPartTwo() {
+    public void testPartTwo() throws Exception {
         assertEquals((Integer) 2548, partTwo());
     }
 }
