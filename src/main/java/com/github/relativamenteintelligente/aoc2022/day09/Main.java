@@ -23,14 +23,27 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-        Rope rope = new Rope();
-        try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
+    public static Integer numberOfUniqueTailPositions(BufferedReader reader, Integer ropeLength) {
+        Rope rope = new Rope(ropeLength);
+        try {
             parseInput(reader, rope::move);
         } catch (Exception e) {
             System.out.println("Error parsing input: " + e.getMessage());
             System.exit(1);
         }
-        System.out.println("Number of unique tail positions: " + rope.numberOfUniqueTailPositions());
+        return rope.numberOfUniqueTailPositions();
+    }
+
+    public static Integer numberOfUniqueTailPositions(Integer ropeLength) throws Exception {
+        var reader = new BufferedReader(new FileReader(FILE_NAME));
+        return numberOfUniqueTailPositions(reader, ropeLength);
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("Number of unique tail positions for rope of length 2: "
+            + numberOfUniqueTailPositions(2));
+
+        System.out.println("Number of unique tail positions for tail of length 10: "
+            + numberOfUniqueTailPositions(10));
     }
 }

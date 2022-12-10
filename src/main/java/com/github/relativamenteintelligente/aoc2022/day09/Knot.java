@@ -15,18 +15,18 @@ public class Knot {
     }
 
     public Knot move(Direction direction) {
-        switch (direction) {
-            case UP    -> position.setY(position.getY() + 1);
-            case LEFT  -> position.setX(position.getX() - 1);
-            case DOWN  -> position.setY(position.getY() - 1);
-            case RIGHT -> position.setX(position.getX() + 1);
-        }
+        position = switch (direction) {
+            case UP -> new Point(position.x(), position.y() + 1);
+            case LEFT -> new Point(position.x() - 1, position.y());
+            case DOWN -> new Point(position.x(), position.y() - 1);
+            case RIGHT -> new Point(position.x() + 1, position.y());
+        };
         return this;
     }
 
     public Double distance(Knot that) {
-        var dx = this.position.getX() - that.position.getX();
-        var dy = this.position.getY() - that.position.getY();
+        var dx = this.position.x() - that.position.x();
+        var dy = this.position.y() - that.position.y();
         return Math.sqrt((double) dx * dx + dy * dy);
     }
 
