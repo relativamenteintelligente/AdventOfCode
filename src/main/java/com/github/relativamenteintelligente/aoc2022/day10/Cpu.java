@@ -7,9 +7,6 @@ public class Cpu {
     private Integer cycleCount = 0;
     private Consumer<Cpu> debugger;
 
-    public Cpu() {
-    }
-
     public Cpu(Consumer<Cpu> debugger) {
         this.debugger = debugger;
     }

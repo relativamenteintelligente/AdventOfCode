@@ -50,11 +50,33 @@ public class Main {
         return cumulativeSignalStrength.get();
     }
 
+    public static void crtPrint(BufferedReader reader) throws Exception {
+        var cpu = new Cpu(c ->
+        {
+            var cycleCount = c.getCycleCount();
+
+            var middleSprite = c.getRegisterX();
+            var horizontalPosition = (cycleCount - 1) % 40;
+            System.out.print(Math.abs(horizontalPosition - middleSprite) < 2 ? "#" : ".");
+
+            if (cycleCount % 40 == 0) {
+                System.out.println();
+            }
+        });
+
+        parseInput(reader).forEach(pair -> cpu.cycle(pair.getLeft(), pair.getRight()));
+    }
+
     public static void main(String[] args) throws Exception {
-        Integer cumulativeSignalStrength;
+        // First star
         try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            cumulativeSignalStrength = cumulativeSignalStrength(reader);
+            Integer cumulativeSignalStrength = cumulativeSignalStrength(reader);
+            System.out.println("Cumultative signal strength: " + cumulativeSignalStrength);
         }
-        System.out.println("Cumultative signal strength: " + cumulativeSignalStrength);
+
+        // Second star
+        try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            crtPrint(reader);
+        }
     }
 }

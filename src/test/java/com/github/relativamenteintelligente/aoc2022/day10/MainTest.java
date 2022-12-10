@@ -1,5 +1,6 @@
 package com.github.relativamenteintelligente.aoc2022.day10;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -8,10 +9,11 @@ import java.io.StringReader;
 import static org.junit.Assert.*;
 
 public class MainTest {
+    BufferedReader reader;
 
-    @Test
-    public void testCumulativeSignalStrength() throws Exception {
-        var reader = new BufferedReader(new StringReader(
+    @Before
+    public void setUp() throws Exception {
+        reader = new BufferedReader(new StringReader(
             """
                 addx 15
                 addx -11
@@ -160,7 +162,10 @@ public class MainTest {
                 noop
                 noop
                 """));
+    }
 
+    @Test
+    public void testCumulativeSignalStrength() throws Exception {
         assertEquals((Integer) 13140, Main.cumulativeSignalStrength(reader));
     }
 }
