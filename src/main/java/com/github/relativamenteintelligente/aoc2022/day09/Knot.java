@@ -17,9 +17,9 @@ public class Knot {
     public Knot move(Direction direction) {
         position = switch (direction) {
             case UP -> new Point(position.x(), position.y() + 1);
-            case LEFT -> new Point(position.x() - 1, position.y());
-            case DOWN -> new Point(position.x(), position.y() - 1);
             case RIGHT -> new Point(position.x() + 1, position.y());
+            case DOWN -> new Point(position.x(), position.y() - 1);
+            case LEFT -> new Point(position.x() - 1, position.y());
         };
         return this;
     }
@@ -34,15 +34,22 @@ public class Knot {
         return new Knot(position.copy());
     }
 
+    private Stream<Knot> neighbours() {
+        return Stream.of(copy().move(Direction.UP),
+            copy().move(Direction.RIGHT),
+            copy().move(Direction.DOWN),
+            copy().move(Direction.LEFT),
+            copy().move(Direction.UP).move(Direction.LEFT),
+            copy().move(Direction.UP).move(Direction.RIGHT),
+            copy().move(Direction.DOWN).move(Direction.LEFT),
+            copy().move(Direction.DOWN).move(Direction.RIGHT)
+        );
+    }
+
     public void update(Knot head) {
-        // if the tail is distant from the head then move to the closest
-        // position to it
         if (distance(head) >= 2) {
-            position = Stream.of(head.copy().move(Direction.UP),
-                    head.copy().move(Direction.RIGHT),
-                    head.copy().move(Direction.DOWN),
-                    head.copy().move(Direction.LEFT))
-                .min(Comparator.comparingDouble(k -> k.distance(this)))
+            position = neighbours()
+                .min(Comparator.comparingDouble(k -> k.distance(head)))
                 .orElseThrow()
                 .position
                 .copy();

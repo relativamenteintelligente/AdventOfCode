@@ -44,9 +44,4 @@ public class Rope {
             .distinct()
             .count();
     }
-
-    @Override
-    public String toString() {
-        return String.join("-", knots.stream().map(k -> k.getPosition().toString()).toList());
-    }
 }
